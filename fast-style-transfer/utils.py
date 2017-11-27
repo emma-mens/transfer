@@ -9,7 +9,9 @@ def save_img(out_path, img):
 
 def scale_img(style_path, style_scale):
     scale = float(style_scale)
-    o0, o1, o2 = scipy.misc.imread(style_path, mode='RGB').shape
+    _style_path = file_io.FileIO(style_path, mode='r')
+    o0, o1, o2 = scipy.misc.imread(_style_path, mode='RGB').shape
+    _style_path.close()
     scale = float(style_scale)
     new_shape = (int(o0 * scale), int(o1 * scale), o2)
     style_target = _get_img(style_path, img_size=new_shape)
